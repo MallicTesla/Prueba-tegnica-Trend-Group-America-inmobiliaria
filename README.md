@@ -28,17 +28,18 @@ Consultas directo en getonbrd
 Prueba
 Utilizar los datos obtenidos de la encuesta para realizar los siguientes ejercicios
 
-Crear una hoja .py llamada prueba.py (python). Escribir código que lea la tabla encuesta y entregue los siguientes datos:
-SNG de la pregunta satisfeccion_general
-Total de personas que respondieron que conocían a la empresa (campo: conocia_empresa)
-SNG de la recomendación (campo: recomendacion)
-nota promedio de la recomendación (campo: recomendacion)
-total de personas que hicieron un comentario
-días, meses que llevo la encuesta
-Realizar consulta al chatGPT utilizando las respuestas abiertas (campo: recomendacion_abierta)
-Análisis de sentimiento por persona que dio una respuesta abierta
-Problemas principales y conclusión
-Realizar un pequeño informe en pdf con la información obtenida al correr la hoja prueba.py y los resultado entregados por el chatGpt. Se tomará en cuenta los detalles, gráficos utilizados, storytelling.
+    Crear una hoja .py llamada prueba.py (python).
+    Escribir código que lea la tabla encuesta y entregue los siguientes datos:
+    SNG de la pregunta satisfeccion_general
+    Total de personas que respondieron que conocían a la empresa (campo: conocia_empresa)
+    SNG de la recomendación (campo: recomendacion)
+    nota promedio de la recomendación (campo: recomendacion)
+    total de personas que hicieron un comentario
+    días, meses que llevo la encuesta
+    Realizar consulta al chatGPT utilizando las respuestas abiertas (campo: recomendacion_abierta)
+    Análisis de sentimiento por persona que dio una respuesta abierta
+    Problemas principales y conclusión
+    Realizar un pequeño informe en pdf con la información obtenida al correr la hoja prueba.py y los resultado entregados por el chatGpt. Se tomará en cuenta los detalles, gráficos utilizados, storytelling.
 
 Instrucciones para entrega:
 Enviar una correo al email pruebasti@trendgroupamerica.com que contenga lo siguiente:
