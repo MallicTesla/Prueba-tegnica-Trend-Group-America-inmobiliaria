@@ -1,4 +1,5 @@
 from unidecode import unidecode
+from datetime import datetime
 import mysql.connector
 
 def conexion_db():
@@ -98,8 +99,33 @@ print (f"Nota promedio de la recomendación: {recomendacion_promedio}")
 print (f"Neutros: {neutros}\n")
 
 
+# Todas las personas que hicieron comentarios ---------------------------------------------------------------------------------
+def hiciern_comentarios (datos):
+    total = sum (1 for campo in datos if campo ['recomendacion_abierta'])
+
+    return total
+
+total = hiciern_comentarios (datos)
+print (f"Se hicieron comentarios {total}\n")
 
 
+# Periodo de encuesta----------------------------------------------------------------------------------------------------------
+def periodo_encuesta (datos):
+    fecha = []
+    for dato in datos :
+        fecha += [datetime.strptime (dato ['fecha'][0:10], "%Y-%m-%d")]
+
+    inicio = min(fecha)
+    final = max(fecha)
+    duracion = (final - inicio).days
+
+    return inicio.strftime('%Y-%m-%d'), final.strftime('%Y-%m-%d'), duracion
+
+inicio, final, duracion = periodo_encuesta (datos)
+
+print (f"La fecha de inicio de la encuesta es: {inicio}")
+print (f"La fecha de finalización de la encuesta es: {final}")
+print (f"La encuesta duro {duracion} dias")
 
 
 
