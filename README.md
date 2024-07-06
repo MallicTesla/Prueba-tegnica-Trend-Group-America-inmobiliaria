@@ -15,14 +15,6 @@ Preguntas del cuestionario
 Pensando en un familiar o amigo, ¿qué tan probable es que recomiende la empresa?, donde 1 significa "Muy improbable" y 7 corresponde a "Definitivamente lo recomendaría" (1-7)
 ¿Por qué no recomendaría? (abierta)
 
-Base de datos
-Motor: MySQL
-Host: 54.219.2.160
-usuario: postulante
-password: HB<tba!Sp6U2j5CN
-DB: prueba_postulantes
-tabla: encuesta
-
 
 Consultas directo en getonbrd
 Prueba

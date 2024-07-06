@@ -1,13 +1,19 @@
+from dotenv import load_dotenv
+import os
+
 from unidecode import unidecode
 from datetime import datetime
 import mysql.connector
 
+
+load_dotenv ()
+
 def conexion_db():
     conn = mysql.connector.connect(
-        host = '54.219.2.160',
-        user = 'postulante',
-        password = 'HB<tba!Sp6U2j5CN',
-        database = 'prueba_postulantes'
+        host = os.getenv ("HOST"),
+        user = os.getenv ("USER"),
+        password = os.getenv ("PASSWORD"),
+        database = os.getenv ("DATABSDE")
     )
     return conn
 
