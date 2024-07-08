@@ -32,9 +32,11 @@ def obtener_datos():
 datos = obtener_datos()
 n = 0
 
-for dato in datos [:5]:
+# print (datos ["recomendacion_abierta"])
+for dato in datos:
     n += 1
-    print (f"{n}) {dato} \n")  
+    print (f"{n}) {dato ['recomendacion_abierta']} \n")  
+    # print (f"{n}) {dato}")
 
 
 # calculo de SNG --------------------------------------------------------------------------------------------------------------
@@ -63,7 +65,7 @@ print(f"SNG de satisfacción general: {sng_satisfaccion}")
 print (f"Neutros {neutros} \n")
 
 
-# cauantos esncuestados conosian a la enpresa ---------------------------------------------------------------------------------
+# cauantos encuestados conosian a la enpresa ----------------------------------------------------------------------------------
 def conocian_empresa (datos):
     total = sum (1 for campo in datos if unidecode (campo ['conocia_empresa']).lower() == 'si')
     return total
@@ -135,6 +137,87 @@ print (f"La encuesta duro {duracion} dias")
 
 
 
+
+# como no tengo acseso a a api de openia estas serian las respuestas que me da chadgpt------------------------------------------
+sentimientos ={"response": [
+    {"id": 1, "sentiment": "Neutral"},
+    {"id": 2, "sentiment": "Negative"},
+    {"id": 3, "sentiment": "Negative"},
+    {"id": 4, "sentiment": "Negative"},
+    {"id": 5, "sentiment": "Negative"},
+    {"id": 6, "sentiment": "Negative"},
+    {"id": 7, "sentiment": "Negative"},
+    {"id": 8, "sentiment": "Negative"},
+    {"id": 9, "sentiment": "Neutral"},
+    {"id": 10, "sentiment": "Neutral"},
+    {"id": 11, "sentiment": "Negative"},
+    {"id": 12, "sentiment": "Neutral"},
+    {"id": 13, "sentiment": "Negative"},
+    {"id": 14, "sentiment": "Positivo"},
+    {"id": 15, "sentiment": "Negative"},
+    {"id": 16, "sentiment": "Neutral"},
+    {"id": 17, "sentiment": "Positivo"},
+    {"id": 18, "sentiment": "Positivo"},
+    {"id": 19, "sentiment": "Neutral"},
+    {"id": 20, "sentiment": "Negative"},
+    {"id": 21, "sentiment": "Neutral"},
+    {"id": 22, "sentiment": "Neutral"},
+    {"id": 23, "sentiment": "Neutral"},
+    {"id": 24, "sentiment": "Negative"},
+    {"id": 25, "sentiment": "Negative"},
+    {"id": 26, "sentiment": "Negative"},
+    {"id": 27, "sentiment": "Negative"},
+    {"id": 28, "sentiment": "Neutral"},
+    {"id": 29, "sentiment": "Neutral"},
+    {"id": 30, "sentiment": "Neutral"},
+    {"id": 31, "sentiment": "Neutral"},
+    {"id": 32, "sentiment": "Neutral"},
+    {"id": 33, "sentiment": "Negative"},
+    {"id": 34, "sentiment": "Neutral"},
+    {"id": 35, "sentiment": "Negative"},
+    {"id": 36, "sentiment": "Negative"},
+    {"id": 37, "sentiment": "Neutral"},
+    {"id": 38, "sentiment": "Negative"},
+    {"id": 39, "sentiment": "Neutral"},
+    {"id": 40, "sentiment": "Negative"},
+    {"id": 41, "sentiment": "Positivo"},
+    {"id": 42, "sentiment": "Negative"},
+    {"id": 43, "sentiment": "Negative"},
+    {"id": 44, "sentiment": "Neutral"},
+    {"id": 45, "sentiment": "Negative"},
+    {"id": 46, "sentiment": "Negative"},
+    {"id": 47, "sentiment": "Negative"},
+    {"id": 48, "sentiment": "Negative"},
+    {"id": 49, "sentiment": "Negative"},
+    {"id": 50, "sentiment": "Neutral"},
+    {"id": 51, "sentiment": "Neutral"},
+    {"id": 52, "sentiment": "Negative"},
+    {"id": 53, "sentiment": "Neutral"},
+    {"id": 54, "sentiment": "Positivo"},
+    {"id": 55, "sentiment": "Neutral"},
+    {"id": 56, "sentiment": "Negative"},
+    {"id": 57, "sentiment": "Neutral"},
+    {"id": 58, "sentiment": "Neutral"},
+    {"id": 59, "sentiment": "Negative"},
+    {"id": 60, "sentiment": "Negative"},
+    {"id": 61, "sentiment": "Negative"}
+    ]
+}
+
+quejas = {"principales_quejas": [
+    "Malo servicio post-venta",
+    "Departamentos defectuosos con muchas fallas",
+    "Precios elevados de los estacionamientos",
+    "Falta de estacionamientos de visita",
+    "Mala gestión y administración del condominio",
+    "Baja calidad de construcción y materiales",
+    "Respuesta lenta e ineficiente a solicitudes de reparación",
+    "Información engañosa durante el proceso de venta",
+    "Problemas con los cálculos de subsidios y demoras",
+    "Mala atención al cliente y personal no profesional"
+    ]
+}
+# def analisis_sentimientos (sentimientos):
 
 
 
