@@ -33,10 +33,10 @@ datos = obtener_datos()
 n = 0
 
 # print (datos ["recomendacion_abierta"])
-for dato in datos:
+for dato in datos[:5]:
     n += 1
-    print (f"{n}) {dato ['recomendacion_abierta']} \n")  
-    # print (f"{n}) {dato}")
+#     print (f"{n}) {dato ['recomendacion_abierta']} \n")  
+    print (f"{n}) {dato} \n")
 
 
 # calculo de SNG --------------------------------------------------------------------------------------------------------------
@@ -58,9 +58,9 @@ def calculo_SNG (datos):
 
     sng = (satisfaccion * 100 / total_respuestas) - (insatisfaccion * 100 / total_respuestas)
 
-    return sng, neutros
+    return sng, neutros, satisfaccion, insatisfaccion
 
-sng_satisfaccion, neutros = calculo_SNG(datos)
+sng_satisfaccion, neutros, satisfaccion, insatisfaccion = calculo_SNG(datos)
 print(f"SNG de satisfacción general: {sng_satisfaccion}")
 print (f"Neutros {neutros} \n")
 
