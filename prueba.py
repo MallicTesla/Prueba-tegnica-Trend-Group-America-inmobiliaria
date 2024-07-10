@@ -61,6 +61,7 @@ def calculo_SNG (datos):
     return sng, neutros, satisfaccion, insatisfaccion
 
 sng_satisfaccion, neutros, satisfaccion, insatisfaccion = calculo_SNG(datos)
+print ("satisfaccion", satisfaccion, "insatisfaccion", insatisfaccion, "neutros", neutros)
 print(f"SNG de satisfacción general: {sng_satisfaccion}")
 print (f"Neutros {neutros} \n")
 
