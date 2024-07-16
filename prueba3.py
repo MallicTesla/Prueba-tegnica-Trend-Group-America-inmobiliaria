@@ -6,84 +6,74 @@ from reportlab.lib.utils import ImageReader
 import io
 import os
 
-# Variable para el texto intermedio
-texto_01 = "La encuesta dio como resultado que la mayoria de la personas "
+class InformeEncuesta:
+    def __init__(self, titulo):
+        self.titulo = titulo
+        self.pdf_buffer = io.BytesIO()
+        self.c = canvas.Canvas (self.pdf_buffer, pagesize = letter)
+        self.image_width = 400
+        self.image_height = 300
+        self.x_position = 100
 
-# Datos para la primera gráfica circular usando pandas
-data_grafica_01 = {'Labels': ['satisfaccion', 'insatisfaccion', 'neutros'], 'Values': [23, 25, 13]}
-df1 = pd.DataFrame(data_grafica_01)
+    def crear_grafica(self, data, labels, title, colors, startangle = 0):
+        fig, ax = plt.subplots()
+        ax.pie (data, labels = labels, autopct = '%1.1f%%', startangle = startangle, colors = colors)
+        ax.axis ('equal')
+        ax.set_title (title, fontsize = 16, weight = 'bold')
 
-# Crear la primera gráfica circular
-fig1, ax1 = plt.subplots()
-ax1.pie(df1['Values'], labels=df1['Labels'], autopct='%1.1f%%', startangle=134, colors=['green', 'red', 'lightskyblue'])
-ax1.axis('equal')  # Para que sea un círculo perfecto
+        img_buffer = io.BytesIO()
+        plt.savefig (img_buffer, format = 'png')
+        img_buffer.seek(0)
+        plt.close (fig)
+        return ImageReader (img_buffer)
 
-# Título de la primera gráfica
-ax1.set_title("SNG de satisfacción general", fontsize=16, weight='bold')
+    def agregar_texto (self, texto):
+        text_y_position = self.y_position1 - 50
+        self.c.setFont ("Helvetica", 12)
+        self.c.drawString (self.x_position, text_y_position, texto)
+        return text_y_position
 
-# Guardar la primera gráfica en un objeto BytesIO
-img_buffer1 = io.BytesIO()
-plt.savefig(img_buffer1, format='png')
-img_buffer1.seek(0)
-plt.close(fig1)
+    def generar_pdf(self, img1, img2, texto):
+        self.c.setFont ("Helvetica-Bold", 16)
+        self.c.drawCentredString (letter[0] / 2.0, letter[1] - 30, self.titulo)
 
-# Convertir BytesIO a ImageReader para la primera gráfica
-img1 = ImageReader(img_buffer1)
+        self.y_position1 = 450
+        self.c.drawImage (img1, self.x_position, self.y_position1, width = self.image_width, height = self.image_height)
 
+        text_y_position = self.agregar_texto (texto)
 
-# Datos para la segunda gráfica circular usando pandas
-data2 = {'Labels': ['X', 'Y', 'Z'], 'Values': [20, 50, 30]}
-df2 = pd.DataFrame(data2)
+        y_position2 = text_y_position - self.image_height - 50
+        self.c.drawImage (img2, self.x_position, y_position2, width = self.image_width, height = self.image_height)
 
-# Crear la segunda gráfica circular
-fig2, ax2 = plt.subplots()
-ax2.pie(df2['Values'], labels=df2['Labels'], autopct='%1.1f%%', startangle=140, colors=['lightgreen', 'lightblue', 'lightpink'])
-ax2.axis('equal')  # Para que sea un círculo perfecto
+        self.c.showPage()
+        self.c.save()
 
-# Título de la segunda gráfica
-ax2.set_title("Gráfica Circular 2", fontsize=16, weight='bold')
-
-# Guardar la segunda gráfica en un objeto BytesIO
-img_buffer2 = io.BytesIO()
-plt.savefig(img_buffer2, format='png')
-img_buffer2.seek(0)
-plt.close(fig2)
-
-# Convertir BytesIO a ImageReader para la segunda gráfica
-img2 = ImageReader(img_buffer2)
+        script_dir = os.path.dirname (os.path.abspath (__file__))
+        output_path = os.path.join (script_dir, "informe_encuesta.pdf")
+        with open (output_path, "wb") as f:
+            f.write (self.pdf_buffer.getvalue())
 
 
-# Crear el PDF
-pdf_buffer = io.BytesIO()
-c = canvas.Canvas(pdf_buffer, pagesize=letter)
+# Titulo
+titulo = "Informe de la encuesta realizada por MK"
+informe = InformeEncuesta (titulo)
 
-# Agregar el título en la parte superior del documento
-title = "Informe de la encuesta realisada por MK"
-c.setFont("Helvetica-Bold", 16)
-c.drawCentredString(letter[0] / 2.0, letter[1] - 50, title)
+# Datos para la primera gráfica
+data_grafica_01 = {'Labels': ['satisfacción', 'insatisfacción', 'neutros'], 'Values': [23, 25, 13]}
+img1 = informe.crear_grafica (data_grafica_01 ['Values'], data_grafica_01 ['Labels'], "SNG de satisfacción general", ['green', 'red', 'lightskyblue'], startangle = 134)
 
-# Ajustar la posición y tamaño de la primera imagen en el PDF
-image_width = 400
-image_height = 300
-x_position = 100
-y_position1 = 400  # Ajusta esta variable para cambiar la altura de la primera gráfica
+# Texto intermedio
+sng = -3.28
+neutros = 13
+total = 61
+texto_01 = f"La encuesta dio un SNG de {'%.2f' % sng} con {neutros} respuestas neutras de un total de {total}"
 
-c.drawImage(img1, x_position, y_position1, width=image_width, height=image_height)
+# Datos para la segunda gráfica
+data_grafica_02 = {'Labels': ['X', 'Y', 'Z'], 'Values': [20, 50, 30]}
+img2 = informe.crear_grafica (data_grafica_02 ['Values'], data_grafica_02 ['Labels'], "Gráfica Circular 2", ['lightgreen', 'lightblue', 'lightpink'], startangle = 140)
 
-# Agregar el texto entre las dos gráficas
-text_y_position = y_position1 - 50
-c.setFont("Helvetica", 12)
-c.drawString(x_position, text_y_position, texto_01)
+# Generar el PDF
+informe.generar_pdf (img1, img2, texto_01)
 
-# Ajustar la posición y tamaño de la segunda imagen en el PDF
-y_position2 = text_y_position - image_height - 50  # Ajusta esta variable para cambiar la altura de la segunda gráfica
-c.drawImage(img2, x_position, y_position2, width=image_width, height=image_height)
 
-c.showPage()
-c.save()
-
-# Guardar el PDF en un archivo en la misma carpeta del script
-script_dir = os.path.dirname(os.path.abspath(__file__))
-output_path = os.path.join(script_dir, "grafica_circular.pdf")
-with open(output_path, "wb") as f:
-    f.write(pdf_buffer.getvalue())
+print ("pronto")
