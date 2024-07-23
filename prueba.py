@@ -12,7 +12,7 @@ def conexion_db():
         host = os.getenv ("HOST"),
         user = os.getenv ("USER"),
         password = os.getenv ("PASSWORD"),
-        database = os.getenv ("DATABSDE")
+        database = os.getenv ("DATABSE")
     )
     return conn
 
@@ -76,7 +76,7 @@ print (f"Total de personas que conocían la empresa: {conocian} \n")
 
 
 # promedio de si recomendarias la enpresa -------------------------------------------------------------------------------------
-def calcualr_recomendacion (datos):
+def calcular_recomendacion (datos):
     total_respuestas = len (datos)
     suma_recomendacion = 0
     no_recomienda = 0
@@ -101,7 +101,7 @@ def calcualr_recomendacion (datos):
 
     return sng_recomendacion, recomendacion_promedio, recomendacion_neutros, recomienda, no_recomienda
 
-sng_recomendacion, recomendacion_promedio, recomendacion_neutros, recomienda, no_recomienda = calcualr_recomendacion (datos)
+sng_recomendacion, recomendacion_promedio, recomendacion_neutros, recomienda, no_recomienda = calcular_recomendacion (datos)
 
 print (f"recomienda {recomienda}, no recomienda {no_recomienda}, neutro {recomendacion_neutros} ")
 print (f"SNG de la recomendación: {sng_recomendacion}")
@@ -110,13 +110,13 @@ print (f"Neutros: {recomendacion_neutros}\n")
 
 
 # Todas las personas que hicieron comentarios ---------------------------------------------------------------------------------
-def hiciern_comentarios (datos):
-    comentarios_total = sum (1 for campo in datos if campo ['recomendacion_abierta'])
+def hicieron_comentarios (datos):
+    comentarios_totales = sum (1 for campo in datos if campo ['recomendacion_abierta'])
 
-    return comentarios_total
+    return comentarios_totales
 
-comentarios_total = hiciern_comentarios (datos)
-print (f"Se hicieron comentarios {comentarios_total}\n")
+comentarios_totales = hicieron_comentarios (datos)
+print (f"Se hicieron comentarios {comentarios_totales}\n")
 
 
 # Periodo de encuesta----------------------------------------------------------------------------------------------------------
@@ -133,7 +133,7 @@ def periodo_encuesta (datos):
 
 inicio, final, duracion = periodo_encuesta (datos)
 
-print (f"La fecha de inicio de la encuesta es: {inicio}")
+print (f"La fecha de inició de la encuesta es: {inicio}")
 print (f"La fecha de finalización de la encuesta es: {final}")
 print (f"La encuesta duró {duracion} días\n")
 
@@ -156,8 +156,8 @@ gpt_quejas = {"principales_quejas": [
 def respuesta_gpt (gpt_quejas):
     prinsipales_quejas = []
 
-    for quejas in gpt_quejas ["principales_quejas"]:
-        prinsipales_quejas.append(quejas)
+    for queja in gpt_quejas ["principales_quejas"]:
+        prinsipales_quejas.append(queja)
 
     return prinsipales_quejas
 
@@ -267,18 +267,18 @@ texto_01 = Texto (f"La encuesta dio un SNG de {'%.2f' % sng_satisfaccion} con {n
 
 # Datos para la segunda gráfica ------------------------------------------------
 
-grafica_2_titulo = "Conocian a la empresa"
-data_grafica_02 = {'Labels': ['Conocian', 'Desconocian'], 'Values': [conocian, no_conocian]}
+grafica_2_titulo = "Conocían a la empresa"
+data_grafica_02 = {'Labels': ['Conocían', 'Desconocían'], 'Values': [conocian, no_conocian]}
 grafica_02 = Grafica (data_grafica_02 ['Values'], data_grafica_02 ['Labels'], grafica_2_titulo, ['green', 'red'], startangle = 150)
 grafica_02.x = 100
 grafica_02.y = 150
 
 
 # Texto 02 --------------------------------------------------------------------
-texto_02_x = 120
+texto_02_x = 100
 texto_02_y = 170
 
-texto_02 = Texto (f"{conocian} personas concian previamente a la compania y {no_conocian} la desconocian.", texto_02_x, texto_02_y)
+texto_02 = Texto (f"{conocian} personas conocían previamente a la empresa y {no_conocian} personas la desconocían.", texto_02_x, texto_02_y)
 
 
 # Tercera gráfica ----------------------------------------------
@@ -292,21 +292,21 @@ grafica_03.y = 460
 texto_03_x = 70
 texto_03_y = 480
 
-texto_03 = Texto (f"Nota promedio de la recomendación: {'%.2f' % recomendacion_promedio} con {recomendacion_neutros} recomendacion neutras de un total de {total}.", texto_03_x, texto_03_y)
+texto_03 = Texto (f"Nota promedio de la recomendación: {'%.2f' % recomendacion_promedio} con {recomendacion_neutros} recomendación neutras de un total de {total}.", texto_03_x, texto_03_y)
 
 
 # Texto 04 --------------------------------------------------------------------
 texto_04_x = 160
 texto_04_y = 450
 
-texto_04 = Texto (f"La encuesta dio un SNG de recomendacion de {'%.2f' % sng_recomendacion}.", texto_04_x, texto_04_y)
+texto_04 = Texto (f"La encuesta dio un SNG de recomendación de {'%.2f' % sng_recomendacion}.", texto_04_x, texto_04_y)
 
 
 # Texto 05 --------------------------------------------------------------------
 texto_05_x = 120
 texto_05_y = 380
 
-texto_05 = Texto (f"La encuesta inicio el {inicio} y final el {final} durando {duracion} días.", texto_05_x, texto_05_y)
+texto_05 = Texto (f"La encuesta inició el {inicio} y final el {final} durando {duracion} días.", texto_05_x, texto_05_y)
 
 
 # Texto 06 --------------------------------------------------------------------
@@ -341,5 +341,5 @@ informe.agregar_elemento (texto_06, pagina = 1)
 
 # Generar el PDF con múltiples páginas
 informe.generar_pdf()
-print ("pronto")
+print ("Pronto")
 

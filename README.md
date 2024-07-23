@@ -1,3 +1,6 @@
+Las credenciales para acceder a la base de datos las agregué a través de un archivo .env utilizando la librería python-dotenv.
+En el archivo requirements.txt se encuentran todas las dependencias necesarias.
+
 Prueba Cargo Desarrollador Python
 
 
@@ -50,5 +53,5 @@ Para el chatGpt utilizar la versión web del chat, si es que no tienes acceso a 
 
 
 Calcular SNG
-![calculo del SNG](imgenes\sng.png)
-![calificacion](imgenes\calificacion.png)
+![calculo del SNG](imgenes/sng.png)
+![calificacion](imgenes/calificacion.png)
