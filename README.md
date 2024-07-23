@@ -50,7 +50,5 @@ Para el chatGpt utilizar la versión web del chat, si es que no tienes acceso a 
 
 
 Calcular SNG
-
-
-
-
+![calculo del SNG](Prueba-tegnica-Trend-Group-America-inmobiliaria\imgenes\sng.png)
+![calificacion](Prueba-tegnica-Trend-Group-America-inmobiliaria\imgenes\calificacion.png)
