@@ -82,7 +82,7 @@ satisfaccion = 23
 insatisfaccion = 25
 neutros = 13
 
-data_grafica_01 = {'Labels': ['satisfacción', 'insatisfacción', 'neutros'], 'Values': [satisfaccion, insatisfaccion, neutros]}
+data_grafica_01 = {'Labels': ['Satisfacción', 'Insatisfacción', 'Neutrales'], 'Values': [satisfaccion, insatisfaccion, neutros]}
 grafica_01 = Grafica(data_grafica_01['Values'], data_grafica_01['Labels'], "SNG de satisfacción general", ['green', 'red', 'lightskyblue'], startangle=134)
 grafica_01.x = 100
 grafica_01.y = 460
@@ -113,7 +113,7 @@ grafica_02.y = 150
 texto_02_x = 120
 texto_02_y = 170
 
-texto_02 = Texto(f"{conocian} personas concian previamente a la compania y {no_conocian} la desconocian.", texto_02_x, texto_02_y)
+texto_02 = Texto(f"{conocian} personas conocían previamente a la compañía y {no_conocian} la desconocian.", texto_02_x, texto_02_y)
 
 
 # Tercera gráfica ----------------------------------------------
@@ -124,65 +124,104 @@ recomendacion_neutros = 5
 data_grafica_03 = {'Labels': ['recomienda', 'no recomienda', 'neutros'], 'Values': [recomienda, no_recomienda, recomendacion_neutros]}
 grafica_03 = Grafica(data_grafica_03['Values'], data_grafica_03 ['Labels'], "Recomendacion", ['green', 'red', 'lightskyblue'], startangle=111)
 grafica_03.x = 100
-grafica_03.y = 460
+grafica_03.y = 490
 
 
 # Texto 03 --------------------------------------------------------------------
 texto_03_x = 70
-texto_03_y = 480
+texto_03_y = 515
 recomendacion_neutros = 5
 recomendacion_promedio = 4.47540983605574
 
-texto_03 = Texto(f"Nota promedio de la recomendación: {'%.2f' % recomendacion_promedio} con {recomendacion_neutros} recomendacion neutras de un total de {total}.", texto_03_x, texto_03_y)
+texto_03 = Texto(f"Nota promedio de la recomendación: {'%.2f' % recomendacion_promedio} con {recomendacion_neutros} recomendación neutras de un total de {total}.", texto_03_x, texto_03_y)
 
 
 # Texto 04 --------------------------------------------------------------------
 texto_04_x = 160
-texto_04_y = 450
+texto_04_y = 500
 sng_recomendacion = -3.278688524590166
 
-texto_04 = Texto(f"La encuesta dio un SNG de recomendacion de {'%.2f' % sng_recomendacion}.", texto_04_x, texto_04_y)
+texto_04 = Texto(f"La encuesta dio un SNG de recomendación de {'%.2f' % sng_recomendacion}.", texto_04_x, texto_04_y)
 
+
+# gpt --------------------------------------------------------------------
+quejas_y_sentimientos = [{
+    "principales_quejas": [
+        "Malo servicio post-venta",
+        "Departamentos defectuosos con muchas fallas",
+        "Precios elevados de los estacionamientos",
+        "Falta de estacionamientos de visita",
+        "Mala gestión y administración del condominio",
+        "Baja calidad de construcción y materiales",
+        "Respuesta lenta e ineficiente a solicitudes de reparación",
+        "Información engañosa durante el proceso de venta",
+        "Problemas con los cálculos de subsidios y demoras",
+        "Mala atención al cliente y personal no profesional"]
+    },{
+    "sentimientos": [
+        "Neutral","Negative","Negative","Negative","Negative","Negative","Negative","Negative","Neutral","Neutral","Negative","Neutral","Negative","Positivo","Negative","Neutral","Positivo",
+        "Positivo","Neutral","Negative","Neutral","Neutral","Neutral","Negative","Negative","Negative","Negative","Neutral","Neutral","Neutral","Neutral","Neutral","Negative","Neutral","Negative",
+        "Negative","Neutral","Negative","Neutral","Negative","Positivo","Negative","Negative","Neutral","Negative","Negative","Negative","Negative","Negative","Neutral","Neutral","Negative",
+        "Neutral","Positivo","Neutral","Negative","Neutral","Neutral","Negative","Negative","Negative"]}
+]
+
+def respuesta_gpt(quejas_y_sentimientos):
+    principales_quejas = quejas_y_sentimientos[0]["principales_quejas"]
+    sentimientos = quejas_y_sentimientos[1]["sentimientos"]
+
+    quejas_formateadas = "Las principales quejas son:\n"
+    positivo = 0
+    negativo = 0
+    neutral = 0
+
+    for i, queja in enumerate (principales_quejas, start=1):
+        quejas_formateadas += f"    {i}) {queja}\n"
+
+    for sentimiento in sentimientos:
+        if sentimiento == "Positivo":
+            positivo += 1
+
+        elif sentimiento == "Negative":
+            negativo += 1
+
+        elif sentimiento == "Neutral":
+            neutral += 1
+
+    return quejas_formateadas, positivo, negativo, neutral
+
+quejas, positivo, negativo, neutral = respuesta_gpt (quejas_y_sentimientos)
+
+
+# grafica_04 --------------------------------------------------------------------
+grafica_4_titulo = "Sentimientos de los comentarios"
+data_grafica_04 = {'Labels': ['Neutral', 'Negativo', 'Positivo' ], 'Values': [neutral, negativo, positivo]}
+grafica_04 = Grafica (data_grafica_04 ['Values'], data_grafica_04 ['Labels'], grafica_4_titulo, ['lightskyblue', 'red', 'green'], startangle = 120)
+grafica_04.x = 100
+grafica_04.y = 200
 
 # Texto 05 --------------------------------------------------------------------
-texto_05_x = 120
-texto_05_y = 380
-inicio = "31/05/2023"
-final = "23/08/2023"
-duracion = 84
+texto_05_x = 228
+texto_05_y = 225
+comentarios_totales = 39
 
-texto_05 = Texto(f"La encuesta inicio el {inicio} y final el {final} durando {duracion} días.", texto_05_x, texto_05_y)
+texto_05 = Texto (f"Se hicieron {comentarios_totales} comentarios", texto_05_x, texto_05_y)
 
 
 # Texto 06 --------------------------------------------------------------------
 texto_06_x = 50
-texto_06_y = 310
+texto_06_y = 200
 
-gpt_quejas = {"principales_quejas": [
-    "Malo servicio post-venta",
-    "Departamentos defectuosos con muchas fallas",
-    "Precios elevados de los estacionamientos",
-    "Falta de estacionamientos de visita",
-    "Mala gestión y administración del condominio",
-    "Baja calidad de construcción y materiales",
-    "Respuesta lenta e ineficiente a solicitudes de reparación",
-    "Información engañosa durante el proceso de venta",
-    "Problemas con los cálculos de subsidios y demoras",
-    "Mala atención al cliente y personal no profesional"
-    ]
-}
+texto_06 = Texto (quejas, texto_06_x, texto_06_y)
 
-def respuesta_gpt(gpt_quejas):
-    prinsipales_quejas = gpt_quejas["principales_quejas"]
-    quejas_formateadas = "Las principales quejas son:\n"
-    for i, queja in enumerate(prinsipales_quejas, start=1):
-        quejas_formateadas += f"    {i}) {queja}\n"
-    return quejas_formateadas
 
-quejas = respuesta_gpt(gpt_quejas)
+# Texto 07 --------------------------------------------------------------------
+texto_07_x = 120
+texto_07_y = 20
+inicio = "31/05/2023"
+final = "23/08/2023"
+duracion = 84
 
-texto_06 = Texto(quejas, texto_06_x, texto_06_y)
-
+texto_07 = Texto(f"La encuesta inicio el {inicio} y finalizó el {final} durando {duracion} días.", texto_07_x, texto_07_y)
 
 # Agregar elementos a la primera página --------------------------------------------------------
 informe.agregar_elemento (grafica_01, pagina = 0)
@@ -194,9 +233,11 @@ informe.agregar_elemento (texto_02, pagina = 0)
 informe.agregar_elemento (grafica_03, pagina = 1)
 informe.agregar_elemento (texto_03, pagina = 1)
 informe.agregar_elemento (texto_04, pagina = 1)
+informe.agregar_elemento (grafica_04, pagina = 1)
 informe.agregar_elemento (texto_05, pagina = 1)
 informe.agregar_elemento (texto_06, pagina = 1)
+informe.agregar_elemento (texto_07, pagina = 1)
 
-# Generar el PDF con múltiples páginas
+# Generar el PDF
 informe.generar_pdf()
 print ("pronto")
